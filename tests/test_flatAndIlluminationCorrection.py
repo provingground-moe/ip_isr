@@ -118,10 +118,10 @@ class IsrTestCases(unittest.TestCase):
         for gain in [-1, 0, 0.1, 1]:
             amp.setGain(gain)
             isrTask.updateVariance(raw, amp)
-            if gain <= 0:
+            if gain <= 0:               # behave the same way as amp.setGain
                 gain = 1
 
-        self.assertEqual(raw.variance.get(0, 0), level/gain + readNoise**2)
+            self.assertEqual(raw.variance.get(0, 0), level/gain + readNoise**2)
 
 class MemoryTester(lsst.utils.tests.MemoryTestCase):
     pass
